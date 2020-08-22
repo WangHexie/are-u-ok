@@ -105,6 +105,11 @@ class Job:
             self._login_path = lp[0]
 
             resp: Response = self._client.post(self._login_url, data=self._login_body, headers=self._login_header)
+            #-------------------------------------------
+            redirect_url = "https://e-report.neu.edu.cn/login/neupass/callback"
+            resp: Response = self._client.get(redirect_url)
+            #-------------------------------------------
+
             if self._is_login_success(resp):
                 return True, ''
             return False, self._wrong_auth
